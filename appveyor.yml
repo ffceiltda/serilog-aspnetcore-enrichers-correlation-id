@@ -1,0 +1,61 @@
+﻿version: '{build}'
+image: Visual Studio 2019
+configuration: Release
+pull_requests:
+  do_not_increment_build_number: true
+
+nuget:
+  account_feed: false
+  project_feed: false
+  disable_publish_on_pr: true
+
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: ozM1D85lww9NWBZK15UZVFlgXKLP+0iuEj5cEPUeOO2nySNn3qPHucXAOl2QxyPw
+
+#cache:
+  #- packages -> **\packages.config
+
+install:
+  - ps: choco install gitversion.portable -y -r --no-progress --version=4.0.0
+  - ps: dotnet tool install --global coverlet.console
+
+assembly_info:
+  patch: true
+
+before_build:
+  #- nuget restore src/Serilog.Enrichers.CorrelationId.sln
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+
+# build:
+  # project: src/Serilog.Enrichers.CorrelationId.sln
+build_script:
+    - cmd: dotnet build src/Serilog.Enrichers.CorrelationId.sln
+
+after_build:
+  - cmd: nuget pack src\Serilog.Enrichers.CorrelationId.nuspec -Version "%GitVersion_NuGetVersion%" -Prop "target=%CONFIGURATION%"
+
+test_script:
+    - cmd: dotnet test src\Serilog.Enrichers.CorrelationId.Tests\Serilog.Enrichers.CorrelationId.Tests.csproj /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:CoverletOutputFormat="opencover" /p:CopyLocalLockFileAssemblies=true -f netcoreapp2.0
+  
+after_test:
+  - nuget install coveralls.net -Version 0.7.0 -OutputDirectory tools
+  - ps: >-
+        if($env:APPVEYOR_PULL_REQUEST_NUMBER -ne "") {
+            return
+        };
+        C:\projects\serilog-enrichers-correlation-id\tools\coveralls.net.0.7.0\tools\csmacnz.coveralls.exe --opencover -i C:\projects\serilog-enrichers-correlation-id\src\CoverageResults\coverage.opencover.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
+
+artifacts:
+  - path: '*.nupkg'
+    name: NuGet
+
+deploy:
+  - provider: Environment
+    name: EKM PreRelease NuGet Feed
+    on:
+      branch: master
+  - provider: Environment
+    name: Public NuGet Feed
+    on:
+      appveyor_repo_tag: true

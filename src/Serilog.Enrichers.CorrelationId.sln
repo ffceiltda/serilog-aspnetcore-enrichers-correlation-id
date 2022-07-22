@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 14.0.0.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.AspNetCore.Enrichers.CorrelationId", "Serilog.AspNetCore.Enrichers.CorrelationId\Serilog.AspNetCore.Enrichers.CorrelationId.csproj", "{D80BD3ED-A776-40F9-A198-BAB325B73659}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.AspNetCore.Enrichers.CorrelationId.Tests", "Serilog.AspNetCore.Enrichers.CorrelationId.Tests\Serilog.AspNetCore.Enrichers.CorrelationId.Tests.csproj", "{1979E570-3BB8-4DF4-B056-664A924442F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci_config", "ci_config", "{4012140B-49D7-48A8-A264-97AE936099CD}"
+ProjectSection(SolutionItems) = preProject
+	..\appveyor.yml = ..\appveyor.yml
+	..\GitVersion.yml = ..\GitVersion.yml
+	Serilog.AspNetCore.Enrichers.CorrelationId.nuspec = Serilog.AspNetCore.Enrichers.CorrelationId.nuspec
+EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D80BD3ED-A776-40F9-A198-BAB325B73659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80BD3ED-A776-40F9-A198-BAB325B73659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80BD3ED-A776-40F9-A198-BAB325B73659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80BD3ED-A776-40F9-A198-BAB325B73659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1979E570-3BB8-4DF4-B056-664A924442F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1979E570-3BB8-4DF4-B056-664A924442F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1979E570-3BB8-4DF4-B056-664A924442F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1979E570-3BB8-4DF4-B056-664A924442F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A89FC39D-453C-4703-A1B0-05380A083832}
+	EndGlobalSection
+EndGlobal

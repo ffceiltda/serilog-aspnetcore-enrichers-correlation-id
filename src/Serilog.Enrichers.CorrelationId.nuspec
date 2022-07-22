@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Serilog.AspNetCore.Enrichers.CorrelationId</id>
+    <version>$version$</version>
+    <title>Serilog.AspNetCore.Enrichers.CorrelationId</title>
+    <authors>mrstebo, ekmsystems, ffceiltda, virgiliofornazin</authors>
+    <ownersffceiltda, virgiliofornazin</owners>
+    <projectUrl>https://github.com/ffceiltda/serilog-aspnetcore-enrichers-correlation-id</projectUrl>
+    <licenseUrl>https://github.com/ffceiltda/serilog-aspnetcore-enrichers-correlation-id/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Enrich ASP.NET Core logs with a unique ID so you can track logs for specific requests.</description>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <tags>serilog enrichers enricher correlationid correlation id aspnetcore</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNetCore.Http" version="2.2.2" />
+      <dependency id="Serilog" version="2.9.0" />
+    </dependencies>  
+  </metadata>
+  <files>
+      <file src="Serilog.AspNetCore.Enrichers.CorrelationId\bin\$target$\*.dll" target="lib" />
+  </files>  
+</package>
